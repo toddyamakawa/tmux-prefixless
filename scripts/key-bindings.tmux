@@ -131,6 +131,9 @@ bind-key -n M-z set-window-option synchronize-panes off
 # Copy pane directory <M-d>
 bind-key -n M-d run-shell -b ~/.tmux/bin/copy-pane-path.bash
 
+# Enter "vim-mode" <M-F>
+bind-key -n M-F run-shell -b "$HOME/.tmux/plugins/tmux-scratchpad/scripts/scratch_pane.bash '~/.tmux/bin/vim-pane.bash #{pane_id}'"
+
 
 # ==============================================================================
 # MISC
