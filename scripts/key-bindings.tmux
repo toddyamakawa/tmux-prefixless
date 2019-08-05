@@ -75,8 +75,8 @@ bind-key -n M-R command-prompt 'rename-session %%'
 bind-key -n M-N new-window -c '#{pane_current_path}'
 
 # Swap window with <M-Shift-Arrow>
-bind-key -n S-M-Left  swap-window -t -1
-bind-key -n S-M-Right swap-window -t +1
+bind-key -n S-M-Left  swap-window -t -1 \; select-window -t -1
+bind-key -n S-M-Right swap-window -t +1 \; select-window -t +1
 
 # I no longer kill windows, instead I kill each pane individually
 # Close window <M-Shift-W>
