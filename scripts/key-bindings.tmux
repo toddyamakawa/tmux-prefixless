@@ -110,9 +110,13 @@ bind-key -n M-w run-shell ~/.tmux/bin/kill-pane.bash \; resize-pane -y 999
 # Even layout
 bind-key -n M-= select-layout -E
 
+# I accidentally press these key combination way too much and screw up my layout
+# So instead I am now using next/previous window:
 # Select next/previous layout with <M-</>>
-bind-key -n M-> next-layout
-bind-key -n M-< previous-layout
+#bind-key -n M-> next-layout
+#bind-key -n M-< previous-layout
+bind-key -n M->     next-window
+bind-key -n M-< previous-window
 
 
 # ==============================================================================
