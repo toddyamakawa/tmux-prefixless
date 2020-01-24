@@ -5,6 +5,7 @@ source $SCRIPTS_DIR/helpers.sh
 
 function main() {
 	tmux-source key-bindings.tmux
+	$SCRIPTS_DIR/key-bindings.bash
 	exit 0
 }
 

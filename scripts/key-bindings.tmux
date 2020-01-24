@@ -2,26 +2,8 @@
 # vi: filetype=tmux
 
 # ==============================================================================
-# CLIENT
-# ==============================================================================
-
-# Detach client
-bind-key -n M-Q detach-client
-
-
-# ==============================================================================
 # NAVIGATION
 # ==============================================================================
-
-# Choose a session
-bind-key -n M-a choose-session
-
-# Switch to next/previous session with <M-S-j/k>
-bind-key -n M-J switch-client -n
-bind-key -n M-K switch-client -p
-
-# Switch to last session
-bind-key -n M-_ switch-client -l
 
 # Switch Session <M-S-Number>
 bind-key -n 'M-!' run-shell '~/.tmux/bin/switch-session.bash next 1'
@@ -115,8 +97,8 @@ bind-key -n M-= select-layout -E
 # Select next/previous layout with <M-</>>
 #bind-key -n M-> next-layout
 #bind-key -n M-< previous-layout
-bind-key -n M->     next-window
-bind-key -n M-< previous-window
+bind-key -n M-> rotate-window -D
+bind-key -n M-< rotate-window -U
 
 
 # ==============================================================================
