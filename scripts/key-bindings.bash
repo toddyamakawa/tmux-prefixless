@@ -39,8 +39,10 @@ tmux \
 
 # Switch to next/previous window with <M-S-h/l>
 tmux \
+	bind-key -n M-< previous-window \;
+	bind-key -n M-> next-window     \; \
 	bind-key -n M-H previous-window \; \
-	bind-key -n M-L     next-window
+	bind-key -n M-L next-window
 
 # Switch to last window
 tmux bind-key -n M-- select-window -l
@@ -70,4 +72,84 @@ tmux \
 tmux bind-key -n M-f resize-pane -Z
 
 
+# ==============================================================================
+# SESSION
+# ==============================================================================
+
+# Rename session with <M-R>
+tmux bind-key -n M-R command-prompt 'rename-session %%'
+
+# I no longer kill windows, instead I kill each pane individually
+# Close window <M-Shift-W>
+#bind-key -n M-W confirm-before -p "kill-window #W? (y/n)" kill-window
+#bind-key -n M-W kill-window
+
+# New pane with <M-S/s/V/v>
+tmux bind-key -n M-S "split-window -vf -c '#{pane_current_path}' \; resize-pane -y 999"
+tmux bind-key -n M-s "split-window -v  -c '#{pane_current_path}' \; resize-pane -y 999"
+tmux bind-key -n M-V "split-window -hf -c '#{pane_current_path}'"
+tmux bind-key -n M-v "split-window -h  -c '#{pane_current_path}'"
+
+# Resize pane with <M-Arrow>
+tmux \
+	bind-key -n M-Left  resize-pane -L \; \
+	bind-key -n M-Right resize-pane -R \; \
+	bind-key -n M-Up    resize-pane -U \; \
+	bind-key -n M-Down  resize-pane -D
+
+# Swap pane with pane above/below with <M-PageUp/PageDown>
+tmux \
+	bind-key -n 'M-PPage swap-pane -U \; resize-pane -y 999' \; \
+	tmux bind-key -n 'M-NPage swap-pane -D \; resize-pane -y 999'
+
+# Close pane using kill-pane.bash
+# kill-pane.bash prevents killing panes if certain processes are running
+tmux bind-key -n M-w 'run-shell ~/.tmux/bin/kill-pane.bash \; resize-pane -y 999'
+
+# ==============================================================================
+# WINDOWS
+# ==============================================================================
+
+# New/rename/swap window with <M-N/r/S-Left/S-Right>
+tmux \
+	bind-key -n M-N new-window -c '#{pane_current_path}'             \; \
+	bind-key -n M-r command-prompt 'rename-window %%'                \; \
+	bind-key -n S-M-Left  'swap-window -t -1 \; select-window -t -1' \; \
+	bind-key -n S-M-Right 'swap-window -t +1 \; select-window -t +1'
+
+# Synchronize panes on/off with with <M-Z/z>
+tmux \
+	bind-key -n M-Z set-window-option synchronize-panes on \; \
+	bind-key -n M-z set-window-option synchronize-panes off
+
+# Make layout even with <M-=>
+tmux bind-key -n M-= select-layout -E
+
+
+# ==============================================================================
+# PANES
+# ==============================================================================
+
+# Copy pane directory <M-d>
+tmux bind-key -n M-d run-shell -b ~/.tmux/bin/copy-pane-path.bash
+
+# Enter "vim-mode" <M-F>
+tmux bind-key -n M-F run-shell -b "$HOME/.tmux/plugins/tmux-scratchpad/scripts/scratch_pane.bash '~/.tmux/bin/vim-pane.bash #{pane_id}'"
+
+
+# ==============================================================================
+# MISC
+# ==============================================================================
+
+# Reload .tmux.conf
+tmux bind-key -n M-F5 source-file ~/.tmux.conf
+
+# TODO: Choose new key-bindings, these are replaced with switch-session
+# Choose colorscheme <M-S-1/2/3/4/5/6>
+#bind-key -n 'M-!' run-shell '~/.tmux/bin/colorscheme.zsh red'
+#bind-key -n 'M-@' run-shell '~/.tmux/bin/colorscheme.zsh yellow'
+#bind-key -n 'M-#' run-shell '~/.tmux/bin/colorscheme.zsh green'
+#bind-key -n 'M-$' run-shell '~/.tmux/bin/colorscheme.zsh blue'
+#bind-key -n 'M-%' run-shell '~/.tmux/bin/colorscheme.zsh purple'
+#bind-key -n 'M-^' run-shell '~/.tmux/bin/colorscheme.zsh black'
 
