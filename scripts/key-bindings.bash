@@ -85,8 +85,8 @@ tmux bind-key -n M-R command-prompt 'rename-session %%'
 #bind-key -n M-W kill-window
 
 # New pane with <M-S/s/V/v>
-tmux bind-key -n M-S "split-window -vf -c '#{pane_current_path}' \; resize-pane -y 999"
-tmux bind-key -n M-s "split-window -v  -c '#{pane_current_path}' \; resize-pane -y 999"
+tmux bind-key -n M-S "split-window -vf -c '#{pane_current_path}' ; resize-pane -y 999"
+tmux bind-key -n M-s "split-window -v  -c '#{pane_current_path}' ; resize-pane -y 999"
 tmux bind-key -n M-V "split-window -hf -c '#{pane_current_path}'"
 tmux bind-key -n M-v "split-window -h  -c '#{pane_current_path}'"
 
@@ -99,12 +99,12 @@ tmux \
 
 # Swap pane with pane above/below with <M-PageUp/PageDown>
 tmux \
-	bind-key -n 'M-PPage swap-pane -U \; resize-pane -y 999' \; \
-	tmux bind-key -n 'M-NPage swap-pane -D \; resize-pane -y 999'
+	bind-key -n 'M-PPage swap-pane -U ; resize-pane -y 999' \; \
+	tmux bind-key -n 'M-NPage swap-pane -D ; resize-pane -y 999'
 
 # Close pane using kill-pane.bash
 # kill-pane.bash prevents killing panes if certain processes are running
-tmux bind-key -n M-w 'run-shell ~/.tmux/bin/kill-pane.bash \; resize-pane -y 999'
+tmux bind-key -n M-w "run-shell $CURRENT_DIR/bin/kill-pane.bash ; resize-pane -y 999"
 
 # ==============================================================================
 # WINDOWS
@@ -112,8 +112,8 @@ tmux bind-key -n M-w 'run-shell ~/.tmux/bin/kill-pane.bash \; resize-pane -y 999
 
 # New/rename/swap window with <M-N/r/S-Left/S-Right>
 tmux \
-	bind-key -n M-N new-window -c '#{pane_current_path}'             \; \
-	bind-key -n M-r command-prompt 'rename-window %%'                \; \
+	bind-key -n M-N       new-window -c '#{pane_current_path}'       \; \
+	bind-key -n M-r       command-prompt 'rename-window %%'          \; \
 	bind-key -n S-M-Left  'swap-window -t -1 \; select-window -t -1' \; \
 	bind-key -n S-M-Right 'swap-window -t +1 \; select-window -t +1'
 
@@ -131,8 +131,9 @@ tmux bind-key -n M-= select-layout -E
 # ==============================================================================
 
 # Copy pane directory <M-d>
-tmux bind-key -n M-d run-shell -b ~/.tmux/bin/copy-pane-path.bash
+tmux bind-key -n M-d "run-shell -b $CURRENT_DIR/bin/copy-pane-path.bash"
 
+# TODO: Unhardcode scratch path
 # Enter "vim-mode" <M-F>
 tmux bind-key -n M-F run-shell -b "$HOME/.tmux/plugins/tmux-scratchpad/scripts/scratch_pane.bash '~/.tmux/bin/vim-pane.bash #{pane_id}'"
 
