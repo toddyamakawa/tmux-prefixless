@@ -39,13 +39,13 @@ tmux \
 
 # Switch to next/previous window with <M-S-h/l>
 tmux \
-	bind-key -n M-< previous-window \;
-	bind-key -n M-> next-window     \; \
-	bind-key -n M-H previous-window \; \
-	bind-key -n M-L next-window
+	bind-key -n 'M-<' previous-window \; \
+	bind-key -n 'M->' next-window     \; \
+	bind-key -n 'M-H' previous-window \; \
+	bind-key -n 'M-L' next-window
 
 # Switch to last window
-tmux bind-key -n M-- select-window -l
+tmux bind-key -n 'M--' select-window -l
 
 # Select Windows <M-#>
 tmux \
@@ -99,8 +99,8 @@ tmux \
 
 # Swap pane with pane above/below with <M-PageUp/PageDown>
 tmux \
-	bind-key -n 'M-PPage swap-pane -U ; resize-pane -y 999' \; \
-	tmux bind-key -n 'M-NPage swap-pane -D ; resize-pane -y 999'
+	bind-key -n 'M-PPage' 'swap-pane -U ; resize-pane -y 999' \; \
+	bind-key -n 'M-NPage' 'swap-pane -D ; resize-pane -y 999'
 
 # Close pane using kill-pane.bash
 # kill-pane.bash prevents killing panes if certain processes are running
@@ -112,10 +112,10 @@ tmux bind-key -n M-w "run-shell $CURRENT_DIR/bin/kill-pane.bash ; resize-pane -y
 
 # New/rename/swap window with <M-N/r/S-Left/S-Right>
 tmux \
-	bind-key -n M-N       new-window -c '#{pane_current_path}'       \; \
-	bind-key -n M-r       command-prompt 'rename-window %%'          \; \
-	bind-key -n S-M-Left  'swap-window -t -1 \; select-window -t -1' \; \
-	bind-key -n S-M-Right 'swap-window -t +1 \; select-window -t +1'
+	bind-key -n M-N         "new-window -c '#{pane_current_path}'"    \; \
+	bind-key -n M-r         "command-prompt 'rename-window %%'"       \; \
+	bind-key -n 'S-M-Left'  'swap-window -t -1 ; select-window -t -1' \; \
+	bind-key -n 'S-M-Right' 'swap-window -t +1 ; select-window -t +1'
 
 # Synchronize panes on/off with with <M-Z/z>
 tmux \
