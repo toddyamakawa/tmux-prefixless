@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 declare -r CURRENT_DIR=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
+#set -e
 
 # ==============================================================================
 # CLIENT
@@ -106,16 +107,17 @@ tmux \
 # kill-pane.bash prevents killing panes if certain processes are running
 tmux bind-key -n M-w "run-shell $CURRENT_DIR/bin/kill-pane.bash ; resize-pane -y 999"
 
+
 # ==============================================================================
 # WINDOWS
 # ==============================================================================
 
 # New/rename/swap window with <M-N/r/S-Left/S-Right>
 tmux \
-	bind-key -n M-N         "new-window -c '#{pane_current_path}'"    \; \
-	bind-key -n M-r         "command-prompt 'rename-window %%'"       \; \
+	bind-key -n M-N         "run-shell -b $CURRENT_DIR/bin/new-window.bash" \; \
 	bind-key -n 'S-M-Left'  'swap-window -t -1 ; select-window -t -1' \; \
-	bind-key -n 'S-M-Right' 'swap-window -t +1 ; select-window -t +1'
+	bind-key -n 'S-M-Right' 'swap-window -t +1 ; select-window -t +1' \; \
+	bind-key -n M-r         "command-prompt 'rename-window %%'"
 
 # Synchronize panes on/off with with <M-Z/z>
 tmux \
