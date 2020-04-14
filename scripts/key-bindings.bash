@@ -114,7 +114,8 @@ tmux bind-key -n M-w "run-shell $CURRENT_DIR/bin/kill-pane.bash ; resize-pane -y
 
 # New/rename/swap window with <M-N/r/S-Left/S-Right>
 tmux \
-	bind-key -n M-N         "run-shell -b $CURRENT_DIR/bin/new-window.bash" \; \
+	bind-key -n M-N         "run-shell -b $CURRENT_DIR/bin/new-window-menu.bash" \; \
+	bind-key -n M-n         "run-shell -b $CURRENT_DIR/bin/new-window.bash" \; \
 	bind-key -n 'S-M-Left'  'swap-window -t -1 ; select-window -t -1' \; \
 	bind-key -n 'S-M-Right' 'swap-window -t +1 ; select-window -t +1' \; \
 	bind-key -n M-r         "command-prompt 'rename-window %%'"
