@@ -147,8 +147,10 @@ tmux bind-key -n M-F run-shell -b "$HOME/.tmux/plugins/tmux-scratchpad/scripts/s
 
 # Page up/down <K/J>
 tmux \
-	bind-key -T copy-mode-vi J "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash down 5'" \; \
-	bind-key -T copy-mode-vi K "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash up 5'"
+	bind-key -T copy-mode-vi K   "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash   up    5'" \; \
+	bind-key -T copy-mode-vi J   "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash down    5'" \; \
+	bind-key -T copy-mode-vi C-u "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash   up half'" \; \
+	bind-key -T copy-mode-vi C-d "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash down half'"
 
 
 # ==============================================================================
