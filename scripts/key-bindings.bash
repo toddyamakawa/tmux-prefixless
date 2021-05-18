@@ -152,6 +152,13 @@ tmux bind-key -T "$keytable" M-m select-pane -m
 # COPY-MODE-VI
 # ==============================================================================
 
+# Use tmux-picker plugin
+plugin_dir="$HOME/.tmux/plugins"
+tmux_picker="$plugin_dir/tmux-picker/tmux-picker.sh"
+if [[ -x "$tmux_picker" ]]; then
+	tmux bind-key -T "$keytable" M-y run-shell "$tmux_picker"
+fi
+
 # Enter copy mode
 tmux bind-key -T "$keytable" M-Y copy-mode
 
