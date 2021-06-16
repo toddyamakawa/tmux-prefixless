@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-declare -r CURRENT_DIR=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
+declare -r CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #set -e
 
 # Map everything into a key table instead of root
