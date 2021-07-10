@@ -195,3 +195,7 @@ tmux bind-key -T "$keytable" M-P choose-buffer "paste-buffer -b %%"
 # ==============================================================================
 tmux set-option -gs key-table "$keytable"
 
+# Enable/disable prefixless
+tmux bind-key -T "root" M-o "set-option -gs key-table $keytable"
+tmux bind-key -T "$keytable" M-i "set-option -gs key-table root"
+
