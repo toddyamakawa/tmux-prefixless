@@ -18,8 +18,8 @@ tmux bind-key -T "$keytable" M-Q detach-client
 
 # Choose a session
 tmux \
-	bind-key -T "$keytable" M-A choose-session -O name\; \
-	bind-key -T "$keytable" M-a run-shell 'tmux-switch pane'
+	bind-key -T "$keytable" M-a choose-session -O name\; \
+	bind-key -T "$keytable" M-A run-shell 'tmux-switch pane'
 
 # Switch to next/previous session with <M-S-j/k>
 tmux \
