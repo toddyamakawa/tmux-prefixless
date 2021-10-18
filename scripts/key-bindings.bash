@@ -151,6 +151,7 @@ tmux bind-key -T "$keytable" M-m select-pane -m
 # ==============================================================================
 # COPY-MODE-VI
 # ==============================================================================
+tmux set-window-option -g mode-keys vi
 
 # Use tmux-picker plugin
 plugin_dir="$HOME/.tmux/plugins"
@@ -162,12 +163,30 @@ fi
 # Enter copy mode
 tmux bind-key -T "$keytable" M-Y copy-mode
 
+# Select from paste-buffer
+tmux bind-key -n M-P choose-buffer "paste-buffer -b %%"
+
+# Copy Selection to System Clipboard <y>
+if (type copy-osc52 &>/dev/null); then
+	tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe copy-osc52
+elif (type xclip &>/dev/null); then
+	tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe xclip
+else
+	tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe xclip
+fi
+
 # Page up/down <K/J>
 tmux \
 	bind-key -T copy-mode-vi K   "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash   up    5'" \; \
 	bind-key -T copy-mode-vi J   "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash down    5'" \; \
 	bind-key -T copy-mode-vi C-u "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash   up half'" \; \
 	bind-key -T copy-mode-vi C-d "run-shell -b '$CURRENT_DIR/bin/smooth-scroll.bash down half'"
+
+# End of Line <L>
+tmux bind-key -T copy-mode-vi L send-keys -X end-of-line
+
+# Start of Line <H>
+tmux bind-key -T copy-mode-vi H send-keys -X start-of-line
 
 
 # ==============================================================================
