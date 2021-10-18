@@ -14,7 +14,7 @@ case "$cmd" in
 		;;
 
 	# Kill pane running certain processes
-	less|zsh)
+	less|bash|zsh)
 		tmux kill-pane
 		;;
 
