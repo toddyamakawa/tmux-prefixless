@@ -168,6 +168,8 @@ tmux bind-key -n M-P choose-buffer "paste-buffer -b %%"
 
 # Copy Selection to System Clipboard <y>
 if (type copy-osc52 &>/dev/null); then
+	# https://medium.com/free-code-camp/tmux-in-practice-integration-with-system-clipboard-bcd72c62ff7b
+	tmux set-option -g set-clipboard on
 	tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe copy-osc52
 elif (type xclip &>/dev/null); then
 	tmux bind-key -T copy-mode-vi y send-keys -X copy-pipe xclip
